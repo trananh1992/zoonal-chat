@@ -1,4 +1,4 @@
-package com.zoonal.chatting.core;
+package com.zoonal.chatting;
 
 import java.util.List;
 
@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.zoonal.chatting.R;
+import com.zoonal.chatting.core.Message;
 
 public class ListChatMessageAdapter extends ArrayAdapter<Message> {
 

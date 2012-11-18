@@ -31,5 +31,9 @@ public class User implements Serializable {
 	public Bitmap getAvatarBitmap() {
 		return avatar;
 	}
+	
+	public void setAvatarBitmap(Bitmap avatar) {
+		this.avatar = avatar;
+	}
 
 }
