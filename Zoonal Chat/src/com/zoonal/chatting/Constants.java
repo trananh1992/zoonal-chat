@@ -7,5 +7,6 @@ import android.graphics.Bitmap;
 public class Constants {
 	
 	public static User currentUser;
+	public static boolean statusConnected;
 	
 }
