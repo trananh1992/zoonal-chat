@@ -26,7 +26,6 @@ public class LoginActivity extends Activity implements OnChatEventListener {
 	private EditText textUser;
 	private EditText textPass;
 	private Intent intent; 
-	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -91,7 +90,7 @@ public class LoginActivity extends Activity implements OnChatEventListener {
 				startActivity(contactIntent);
 			} else {
 				// hien thi mot cai alert thong bao login khong thanh cong
-				
+				final Intent intent= new Intent(this, ContactActivity.class);
 			}
 		}
 		else if (obj.getEvent().equalsIgnoreCase("error")) {
