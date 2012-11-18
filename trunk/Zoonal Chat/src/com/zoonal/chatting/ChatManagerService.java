@@ -38,6 +38,7 @@ public class ChatManagerService extends Service {
 
 	@Override
 	public int onStartCommand(Intent intent, int flags, int startId) {
+		log("service started");
 		chatManager = new ChatManager();
 		return Service.START_STICKY;
 	}
@@ -59,25 +60,41 @@ public class ChatManagerService extends Service {
 	
 	public class ChatManager implements IOCallback {
 		
-		public static final String SERVER_ADDRESS = "http://127.0.0.1:8000";
+		public static final String SERVER_ADDRESS = "http://192.168.43.2:8000";
 		private SocketIO socket;
 		private ArrayList<OnChatEventListener> listeners;
 		private HashMap<String, User> users;
 		private HashMap<String, ChatSession> sessions;
 		
 		public ChatManager() {
+			this.connect();
+		}
+		
+		public void connect() {
 			try {
-				URL url = new URL(SERVER_ADDRESS);
-				socket = new SocketIO();
-				socket.connect(url, chatManager);
+				socket = new SocketIO(SERVER_ADDRESS);
+				socket.connect(this);
+				log("connect to server ok");
 				
 				listeners = new ArrayList<OnChatEventListener>();
 				users = new HashMap<String, User>();
 				sessions = new HashMap<String, ChatSession>();
 			} catch (MalformedURLException ex) {
-				ex.printStackTrace();
-				ChatManagerService.this.stopSelf();
-			}
+				log("cannot connect server: " + ex);
+				for (StackTraceElement element : ex.getStackTrace()) {
+					log(element);
+				}
+			} 
+		}
+		
+		public void reconnect() {
+			socket.reconnect();
+			log("socket reconnect to server");
+		}
+		
+		public void disconnect() {
+			socket.disconnect();
+			log("socket disconnect to server");
 		}
 		
 		public void onMessage(JSONObject json, IOAcknowledge ack) {
@@ -89,8 +106,10 @@ public class ChatManagerService extends Service {
 	    }
 
 	    public void onError(SocketIOException socketIOException) {
-	    	log("error. socket exception");
-	    	log(socketIOException);
+	    	log("onError: " + socketIOException);
+	    	for (StackTraceElement element : socketIOException.getStackTrace()) {
+	    		log(element);
+	    	}
 	    	broadcastToListener("error", new Object[] { socketIOException });
 	    }
 
@@ -105,7 +124,11 @@ public class ChatManagerService extends Service {
 	    }
 
 	    public void on(String event, IOAcknowledge ack, Object... args) {
-	    	if (event.equalsIgnoreCase("user-message")) {
+	    	if (event.equalsIgnoreCase("login")) {
+	    		Constants.statusConnected = true;
+	    		this.broadcastToListener(event, args);
+	    	}
+	    	else if (event.equalsIgnoreCase("user-message")) {
 	    		String username = (String) args[0];
 	    		String url = (String) args[2];
 	    		
