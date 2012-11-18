@@ -17,7 +17,6 @@ import android.widget.TextView;
 
 import com.zoonal.chatting.core.ChatEventObject;
 import com.zoonal.chatting.core.ChatSession;
-import com.zoonal.chatting.core.ListChatMessageAdapter;
 import com.zoonal.chatting.core.Message;
 import com.zoonal.chatting.core.OnChatEventListener;
 

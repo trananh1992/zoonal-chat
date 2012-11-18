@@ -1,7 +1,8 @@
-/**
- * 
- */
 package com.zoonal.chatting;
+
+import java.util.ArrayList;
+
+import com.zoonal.chatting.core.User;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -11,16 +12,14 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-/**
- * @author Hiepnn
- * 
- */
-public class ImageAdapter extends BaseAdapter {
+public class ContactListAdapter extends BaseAdapter {
 
 	private Context mContext;
+	private ArrayList<User> items;
 
-	public ImageAdapter(Context c) {
+	public ContactListAdapter(Context c) {
 		mContext = c;
+		items = new ArrayList<User>();
 	}
 
 	public Integer[] mThumbIds = { R.drawable.pic_1, R.drawable.pic_2,
@@ -29,15 +28,17 @@ public class ImageAdapter extends BaseAdapter {
 			R.drawable.pic_9, R.drawable.pic_10, R.drawable.pic_11,
 			R.drawable.pic_12, R.drawable.pic_13, R.drawable.pic_14,
 			R.drawable.pic_15, };
-
-	public int getCount() {
-		// TODO Auto-generated method stub
-		return mThumbIds.length;
+	
+	public void addItem(User newItem) {
+		items.add(newItem);
 	}
 
-	public Object getItem(int position) {
-		// TODO Auto-generated method stub
-		return mThumbIds[position];
+	public int getCount() {
+		return items.size();
+	}
+
+	public User getItem(int position) {
+		return items.get(position);
 	}
 
 	public long getItemId(int position) {
@@ -59,18 +60,11 @@ public class ImageAdapter extends BaseAdapter {
 			
 			textView.setText(mThumbIds[position]);
 			imageView.setImageResource(mThumbIds[position]);
-		}else {
+		} else {
 			gridView = convertView;
 		}
 		
 		return gridView;
-		
-		/*ImageView imageView = new ImageView(mContext);
-		imageView.setImageResource(mThumbIds[position]);
-		imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-		imageView.setLayoutParams(new GridView.LayoutParams(80,80));
-		return imageView;*/
-		
 	}
 
 }

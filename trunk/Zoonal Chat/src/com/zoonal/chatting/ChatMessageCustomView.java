@@ -1,4 +1,4 @@
-package com.zoonal.chatting.core;
+package com.zoonal.chatting;
 
 import android.content.Context;
 import android.view.LayoutInflater;
