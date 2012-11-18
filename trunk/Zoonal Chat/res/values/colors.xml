@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="background_color">#cccccc</color>
+    <color name="bgflogin_color">#ffffff</color>
+    <color name="pres1">#888888</color>
+    <color name="pres2">#222222</color>
+    <color name="stro3">#ffffff</color>
+    
+</resources>
