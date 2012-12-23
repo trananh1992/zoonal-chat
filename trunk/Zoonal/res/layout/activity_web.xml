@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <LinearLayout
+        android:id="@+id/menu"
+        android:background="@drawable/zoonal_bg_start_menu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left"
+        android:orientation="vertical" >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:layout_margin="5dp"
+            android:background="@drawable/cus_radius_all">
+            
+            <ImageView 
+                android:id="@+id/menu_image_search"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:src="@drawable/icon_zoom_in"/>
+
+            <EditText
+                android:id="@+id/txtSearch"
+                android:layout_marginTop="3dp"
+                android:layout_toRightOf="@id/menu_image_search"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:inputType="text"
+                android:background="@drawable/empty_edittext_bg"
+                android:hint="Tìm kiếm"
+                android:textSize="15sp" />
+
+            <Button
+                android:layout_alignParentRight="true"
+                android:id="@+id/bttSearch"
+                android:background="@drawable/icon_settings"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <requestFocus />
+            </Button>
+        </RelativeLayout>
+
+        <ListView
+            android:id="@+id/menu_listview"
+            android:layout_marginTop="1dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/web"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="left"
+        android:layout_marginLeft="0dp"
+        android:background="#ffffffff"
+        android:orientation="vertical" >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/headerbar_background"
+            android:padding="3dp" >
+
+            <Button
+                android:id="@+id/bttSlide"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:background="@drawable/zoonal_icon_menu" />
+
+            <Button
+                android:id="@+id/bttNotification"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:background="@drawable/zoonal_notification_idle" />
+        </RelativeLayout>
+
+        <WebView
+            android:id="@+id/webview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+
+</FrameLayout>
