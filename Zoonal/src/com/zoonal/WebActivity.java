@@ -50,7 +50,7 @@ public class WebActivity extends Activity implements AnimationListener {
 	private boolean menuOut = false;
 	private int menuWidth;
 	private int currMotionEvent = -1;
-	private PointF lastPoint;
+	private PointF lastMovePoint, startDownPoint;
 	private ListView listview;
 	private MenuAdapter adapter;
 
@@ -68,12 +68,7 @@ public class WebActivity extends Activity implements AnimationListener {
         web.findViewById(R.id.bttSlide).setOnClickListener(new OnClickListener() {
 			
 			public void onClick(View v) {
-				if (menuWidth == 0) {
-					menuWidth = (int)(web.getMeasuredWidth() * SLIDING_MENU_RELATIVE_WIDTH);
-					FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) menu.getLayoutParams();
-					params.width = (int)(menuWidth);
-					menu.setLayoutParams(params);
-				}
+				WebActivity.this.setMenuWidth();
 				int to = (!menuOut) ? menuWidth : -menuWidth;
 				menuOut = !menuOut;
 				slidingMenu(0, to, SLIDING_MENU_DELAY);
@@ -85,6 +80,7 @@ public class WebActivity extends Activity implements AnimationListener {
         webview.setOnTouchListener(new OnTouchListener() {
 			
 			public boolean onTouch(View v, MotionEvent event) {
+				WebActivity.this.setMenuWidth();
 				final float x = event.getX() + WebActivity.this.getLeftMargin(web);
 				event.setLocation(x, event.getY());
 				WebActivity.this.onWebViewTouchEvent(event);
@@ -104,12 +100,27 @@ public class WebActivity extends Activity implements AnimationListener {
     }
     
     @Override
+	protected void onResume() {
+		super.onResume();
+	}
+
+	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
     	if ((keyCode == KeyEvent.KEYCODE_BACK) && webview.canGoBack()) {
     		webview.goBack();
     		return true;
     	}
 		return super.onKeyDown(keyCode, event);		
+	}
+	
+	private void setMenuWidth() {
+		if (menuWidth == 0) {
+			menuWidth = (int)(web.getMeasuredWidth() * SLIDING_MENU_RELATIVE_WIDTH);
+			FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) menu.getLayoutParams();
+			params.width = (int)(menuWidth);
+			menu.setLayoutParams(params);
+			log("new menu width " + menuWidth);
+		}
 	}
     
     private void initFakeMenu() {
@@ -145,29 +156,35 @@ public class WebActivity extends Activity implements AnimationListener {
     }
     
 	private void onWebViewTouchEvent(MotionEvent event) {
-		if (!menuOut) {
-			return;
-		}
     	log("touch event " + event.getAction());
     	int action = event.getAction();
     	if (action == MotionEvent.ACTION_DOWN) {
     		currMotionEvent = action;
-    	} else if (action == MotionEvent.ACTION_MOVE && currMotionEvent == MotionEvent.ACTION_DOWN) {
+    		startDownPoint = new PointF(event.getX(), event.getY());
+    	} else if (action == MotionEvent.ACTION_MOVE && menuOut 
+    			&& currMotionEvent == MotionEvent.ACTION_DOWN) {
     		PointF p = new PointF(event.getX(), event.getY());
-    		if (lastPoint != null) {
-    			log("touch move from " + lastPoint.x + " to " + event.getX());
-				translateX(web, (int) (p.x - lastPoint.x), 0, menuWidth);
+    		if (lastMovePoint != null) {
+    			log("touch move from " + lastMovePoint.x + " to " + event.getX());
+				translateX(web, (int) (p.x - lastMovePoint.x), 0, menuWidth);
     		}
-    		lastPoint = p;
+    		lastMovePoint = p;
     	} else if (action == MotionEvent.ACTION_UP) {
     		currMotionEvent = action;
-    		lastPoint = null;
+    		lastMovePoint = null;
 			if (event.getX() > (menuWidth / (2 * SLIDING_MENU_RELATIVE_WIDTH))) {
 				this.slidingMenu(0, menuWidth - this.getLeftMargin(web), SLIDING_MENU_DELAY / 2);
 				menuOut = true;
 			} else {
 				this.slidingMenu(0, -this.getLeftMargin(web), SLIDING_MENU_DELAY / 2);
 				menuOut = false;
+				if (startDownPoint != null) {
+					PointF endUpPoint = new PointF(event.getX(), event.getY());
+					if (endUpPoint.x - startDownPoint.x > 200
+							&& Math.abs(endUpPoint.y - startDownPoint.y) < 20) {
+						slidingMenu(0, menuWidth, SLIDING_MENU_DELAY);
+					}
+				}
 			}
     	}
 	}
