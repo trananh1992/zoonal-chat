@@ -1,0 +1,193 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="#d1d1d1"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:background="@drawable/cus_radius_all"
+        android:orientation="vertical"
+        android:padding="1dp" >
+
+        <EditText
+            android:id="@+id/settingServerReceiverTxt"
+            android:layout_width="fill_parent"
+            android:layout_marginTop="5dp"
+            android:layout_height="35dp"
+            android:background="@drawable/empty_edittext_bg"
+            android:hint="Máy chủ nhận mail(ví dụ imap.gmail.com)"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:textSize="13sp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="#313131" />
+
+        <EditText
+            android:id="@+id/settingServerSenderTxt"
+            android:layout_width="fill_parent"
+            android:layout_height="40dp"
+            android:background="@drawable/empty_edittext_bg"
+            android:hint="Máy chủ gửi mail(ví dụ smtp.gmail.com)"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:textSize="13sp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="#313131" />
+
+        <EditText
+            android:id="@+id/settingEmailAddrTxt"
+            android:layout_width="fill_parent"
+            android:layout_height="40dp"
+            android:background="@drawable/empty_edittext_bg"
+            android:hint="Địa chỉ mail(ví dụ linh@gmail.com)"
+            android:inputType="textEmailAddress"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:textSize="13sp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="#313131" />
+
+        <EditText
+            android:id="@+id/settingMailPassTxt"
+            android:layout_width="fill_parent"
+            android:layout_height="40dp"
+            android:background="@drawable/empty_edittext_bg"
+            android:hint="Mật khẩu mail"
+            android:inputType="textPassword"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:textSize="13sp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="#313131" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp" >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="true"
+                android:gravity="center_vertical"
+                android:paddingLeft="5dp"
+                android:text="SSL"
+                android:textSize="15sp" />
+
+            <CheckBox
+                android:id="@+id/settingSSlCb"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:paddingRight="5dp" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="#313131" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp" >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:paddingLeft="5dp"
+                android:text="Email thông báo bài viết"
+                android:textSize="13sp" />
+
+            <CheckBox
+                android:id="@+id/settingEmailWhenNewPostCb"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:paddingRight="5dp" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="#313131" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp" >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="4"
+                android:gravity="center_vertical"
+                android:paddingLeft="5dp"
+                android:text="Email thông báo trả lời"
+                android:textSize="13sp" />
+
+            <CheckBox
+                android:id="@+id/settingEmailWhenNewReplayCb"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:paddingRight="5dp" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="#313131" />
+
+        <EditText
+            android:id="@+id/settingPhoneTxt"
+            android:layout_width="fill_parent"
+            android:layout_height="40dp"
+            android:background="@drawable/empty_edittext_bg"
+            android:hint="Điện thoại"
+            android:inputType="phone"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:textSize="13sp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="#313131" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp" >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:paddingLeft="5dp"
+                android:text="Sms bài viết"
+                android:textSize="13sp" />
+
+            <CheckBox
+                android:id="@+id/settingSmsWhenNewPostCb"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:paddingRight="5dp" />
+        </RelativeLayout>
+    </LinearLayout>
+
+</ScrollView>

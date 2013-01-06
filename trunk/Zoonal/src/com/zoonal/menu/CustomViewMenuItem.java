@@ -18,7 +18,7 @@ public class CustomViewMenuItem extends LinearLayout {
 	public CustomViewMenuItem(Context context) {
 		super(context);
 		LayoutInflater li = (LayoutInflater)this.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-		li.inflate(R.layout.list_menu, this, true);
+		li.inflate(R.layout.menu_list, this, true);
 
 		image = (ImageView) findViewById(R.id.menu_image);	
 		title = (TextView) findViewById(R.id.menu_title);

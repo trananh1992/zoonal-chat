@@ -1,8 +1,5 @@
 package com.zoonal;
 
-import com.zoonal.menu.MenuAdapter;
-import com.zoonal.menu.MenuItem;
-
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -30,11 +27,14 @@ import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.widget.Adapter;
-import android.widget.ArrayAdapter;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ListView;
+
+import com.zoonal.menu.MenuAdapter;
+import com.zoonal.settings.SettingMenuActivity;
 
 public class WebActivity extends Activity implements AnimationListener {
 	
@@ -124,9 +124,20 @@ public class WebActivity extends Activity implements AnimationListener {
 	}
     
     private void initFakeMenu() {
-    	adapter = new MenuAdapter(this, R.layout.list_menu);
+    	adapter = new MenuAdapter(this, R.layout.menu_list);
     	listview = (ListView) findViewById(R.id.menu_listview);
     	listview.setAdapter(adapter);
+    	listview.setOnItemClickListener(new OnItemClickListener() {
+
+			public void onItemClick(AdapterView<?> adapter, View view, int position,
+					long time) {
+				if (position == 0) {
+					Intent settingInt = new Intent(WebActivity.this, SettingMenuActivity.class);
+					WebActivity.this.startActivity(settingInt);
+				}
+			}
+    		
+		});
     }
     
     private void slidingMenu(int from, int to, int duration) {
@@ -182,6 +193,8 @@ public class WebActivity extends Activity implements AnimationListener {
 					PointF endUpPoint = new PointF(event.getX(), event.getY());
 					if (endUpPoint.x - startDownPoint.x > 200
 							&& Math.abs(endUpPoint.y - startDownPoint.y) < 20) {
+						log("distance x: " + (endUpPoint.x - startDownPoint.x));
+						log("distance y: " + (endUpPoint.y - startDownPoint.y));
 						slidingMenu(0, menuWidth, SLIDING_MENU_DELAY);
 					}
 				}
