@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <Button
+        android:text="Chung"
+        android:onClick="onItemClick"
+        android:id="@+id/settingGeneralBtt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:text="Ca nhan"
+        android:onClick="onItemClick"
+        android:id="@+id/settingPersonalBtt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:text="Email/sms"
+        android:onClick="onItemClick"
+        android:id="@+id/settingEmailBtt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:text="Bao mat"
+        android:onClick="onItemClick"
+        android:id="@+id/settingSecurityBtt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>
